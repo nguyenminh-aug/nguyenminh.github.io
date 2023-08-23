@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Callbacks - fullPage.js</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="fullPage callback function." />
+	<meta name="keywords"  content="fullpage,jquery,demo,callbac,function,event" />
+	<meta name="Resource-type" content="Document" />
+
+
+	<link rel="stylesheet" type="text/css" href="../dist/fullpage.css" />
+	<link rel="stylesheet" type="text/css" href="examples.css" />
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+	
+</head>
+<body>
+
+
+
+
+<div id="fullpage">
+	<div class="section " id="11">
+    <div class="intro">
+      <div class="js-animate animated " data-animate="fadeInLeft" data-time="1500"
+            style="position: absolute;width: 100%;">
+            <img style="max-width: 100%;" src="./trang1/final/4.png"; >
+          </div>
+  		
+  		
+    </div>
+	</div>
+	
+	
+	<div class="section" id="33">
+		<div class="intro">
+			<h1>2</h1>
+		</div>
+	</div>
+  <div class="section " id="44">
+    <div class="intro">
+  		<h1>3</h1>
+    </div>
+	</div>
+	<div class="section" id="55">
+		<div class="intro">
+			
+			<h1>4</h1>
+    </div>
+	</div>
+	<div class="section" id="66">
+		<div class="intro">
+			<h1>5</h1>
+		</div>
+	</div>
+  <div class="section " id="77">
+    <div class="intro">
+  		<h1>6</h1>
+    </div>
+	</div>
+	<div class="section" id="88">
+		<div class="intro">
+			<h1>7</h1>
+		</div>
+	</div>
+	<div class="section" id="99">
+		<div class="intro">
+			<h1>8</h1>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="../dist/fullpage.js"></script>
+<script type="text/javascript" src="examples.js"></script>
+<script type="text/javascript">
+  var interval;
+var autoScrollDelay = 50000; // Thời gian chờ giữa các lần chuyển trang (5 giây)
+
+function startAutoScroll() {
+  interval = setInterval(function() {
+      myFullpage.moveSectionDown(); // Chuyển đến trang tiếp theo
+  }, autoScrollDelay);
+}
+
+function resetAutoScrollTimer() {
+  clearInterval(interval); // Dừng vòng lặp hiện tại
+  startAutoScroll(); // Khởi động vòng lặp mới
+}
+
+var myFullpage = new fullpage('#fullpage', {
+  
+  sectionsColor: ['#1BBC9B', '#1BBC9B', '#1BBC9B','#1BBC9B', '#1BBC9B', '#1BBC9B','#1BBC9B', '#1BBC9B', ],
+  onLeave: function(origin, destination, direction){
+      resetAutoScrollTimer(); // Reset thời gian khi chuyển trang
+      if(destination.index === 2){
+          destination.item.classList.add('load-background');
+      }
+  }
+});
+
+// Khởi động vòng lặp tự động chuyển trang ban đầu
+startAutoScroll();
+
+// Dừng vòng lặp sau khi người dùng tương tác
+document.addEventListener("wheel", function() {
+  resetAutoScrollTimer();
+});
+
+</script>
+
+</body>
+</html>
